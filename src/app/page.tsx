@@ -1,12 +1,11 @@
-import { Circle, Square } from "@/components/Geo";
+import { Geo, } from "@/components/Geo";
 
 
 function Page(){
   return(
     <div>
       <h1>Olá mundo</h1>
-      <Square />
-      <Circle />
+      <Geo/>
     </div>
   )
 }
