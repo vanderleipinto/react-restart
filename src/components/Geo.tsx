@@ -9,7 +9,7 @@ export const Geo = () => {
       <div className="flex gap-2 bord2 p-3">
         <Square/>
         <Circle/>
-       </div>
-    </div>
+       </div> 
+    </div> 
   )
 }
