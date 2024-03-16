@@ -7,7 +7,11 @@ function Page(){
     <div>
       <h1>Olá mundo</h1>
       <Geo/>
-      <Person/>
+      <Person 
+        name="Elon Musk Props"
+        avatar= 'https://files.sunoresearch.com.br/p/uploads/2018/09/Elon-Musk-2-400x300.jpg'
+        roles= {['Ceo da Tesla', 'Ceo da Spacex']}
+      />
     </div>
   )
 }
