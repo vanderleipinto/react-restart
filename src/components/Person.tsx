@@ -1,27 +1,28 @@
-// JSX e variáveis, funções e objetos
-
-const getWeekday = () => {
-  return new Intl.DateTimeFormat('pt-BR', {weekday: 'long'}).format(new Date());
+type Props = {
+  name: string,
+  avatar: string,
+  roles: string[],
+  address?: string //valor opcional, pode ou não receber valores por parâmetros.
 }
 
-const data = {
-  name: 'Elon Musk',
-  avatar: 'https://files.sunoresearch.com.br/p/uploads/2018/09/Elon-Musk-2-400x300.jpg',
-  roles: ['Ceo da Tesla', 'Ceo da Spacex']
-}
-export const Person = () => {
-  const name: string = 'Elon Musk'
-  const avatar: string = 'https://files.sunoresearch.com.br/p/uploads/2018/09/Elon-Musk-2-400x300.jpg'
 
+export const Person = ({name, avatar, roles}: Props) => {
+  
   return (
-    <div>
-      <h1 style={{color: 'green', fontSize: '30px'}} >Hoje é {getWeekday()}</h1>
-      <img src={avatar} alt={data.name} className="w-40"/>
+      <>
+        <h1>{name}</h1>
+        <img 
+          src={avatar} 
+          alt={name}
+          className="w-40"
+        />
 
-      <ul>
-        <li>{data.roles[1]}</li>
-        <li>{data.roles[0]}</li>
-      </ul>
-    </div>
-  )
+        <ul>
+          <li>{roles[0]}</li>
+          <li>{roles[1]}</li>
+        </ul>
+      
+      </>
+   
+    )
 }
