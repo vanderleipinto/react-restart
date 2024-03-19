@@ -1,14 +1,20 @@
-import { Card } from "@/components/Card";
-
+import { peopleList } from '@/data/peopleList'
 
 function Page(){
+  
+
   return(
     <div>
-      <h1>Olá mundo</h1>      
-      <Card phrase="Alguma frase" author="Coach de milhões"/> 
-      <Card phrase="Alguma frase" />  
+      <h1>Olá mundo</h1>
+      {peopleList.length > 0 && 
+        <ul>
+          {peopleList.map(person => 
+              <li key={person.id}> {person.name} - {person.profession}</li>
+            )}
+        </ul>
+      }
     </div> 
   )
 }
 
-export default Page; 
+export default Page;  
