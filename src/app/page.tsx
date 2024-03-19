@@ -1,3 +1,5 @@
+import { Card } from "@/components/Card";
+import { Circle } from "@/components/Circle";
 import { Geo, } from "@/components/Geo";
 import { Person } from "@/components/Person";
 
@@ -6,17 +8,17 @@ function Page(){
   return(
     <div>
       <h1>Olá mundo</h1>
-      <Geo/>
-      <Person
-        name="Elon Musk Props"
-        avatar= 'https://files.sunoresearch.com.br/p/uploads/2018/09/Elon-Musk-2-400x300.jpg'
-        roles= {['Ceo da Tesla', 'Ceo da Spacex']}
-      />
-      <Person
-        name="Homem sem avatar"
-        
-        roles= {['Ceo da Tesla', 'Ceo da Spacex']}
-      />
+      
+      <Card>
+      <>
+          <h1 className="text-3xl font-bold italic"> Tudo que vier aqui será children lá no componente.</h1>
+          <p className="text-right text-sm"> "Author descohecido"</p>
+          <p> Essa children por estar envolvida em blanckets (fragment) será considerada um jsx, o que exige um type 
+            (children: ReactNode;)
+            diferente lá no componente. </p>
+            <Circle/>
+      </>
+      </Card>
     </div>
   )
 }
