@@ -2,22 +2,29 @@ import { peopleList } from '@/data/peopleList'
 
 function Page(){
   
-  const chemists = peopleList.filter( person => person.profession === 'chemist');
+  const fullTime = new Intl.DateTimeFormat('pt-BR', {
+    timeStyle: 'short',
+    hour12: false
+  }).format(); 
+
+  const hour  = new Date().getHours();  
+  
   return(
-    <div>
-      <h1>Olá mundo</h1>
-      {chemists.length > 0 && 
-        <>
-          <h3>Lista de quimicos</h3>
-            <ul>
-              {chemists.map(person => 
-                  <li key={person.id}> {person.name} - {person.profession}</li>
-                )}
-            </ul>
-          </>
-      }
+    <div className='w-screen h-screen flex flex-col justify-center items-center text-white
+    bg-gradient-to-r from-sky-500 to-indigo-500'>
+      <div className='text-9xl'></div>
+      <div className="text-5xl font-bold"></div>
+
+      
+      
+      <div className='text-9xl'>{fullTime}</div>
+      <div className='text-5xl font-bold'>
+        {hour >= 0 &&  hour < 12 && 'Bom dia 😃'}  
+        {hour >= 12 && hour < 18 && 'Boa tarde 🤓'}  
+        {hour >= 23 && hour <= 23 && 'Boa noite 😴'}  
+        
+      </div>      
     </div> 
   )
 }
-
 export default Page;  
