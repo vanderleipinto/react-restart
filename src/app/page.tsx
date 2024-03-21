@@ -1,3 +1,4 @@
+import { Rate } from '@/components/Rate';
 import { peopleList } from '@/data/peopleList'
 
 function Page(){
@@ -11,20 +12,12 @@ function Page(){
   
   return(
     <div className='w-screen h-screen flex flex-col justify-center items-center text-white
-    bg-gradient-to-r from-sky-500 to-indigo-500'>
-      <div className='text-9xl'></div>
-      <div className="text-5xl font-bold"></div>
-
+    bg-gradient-to-r from-gray-900 to-gray-800'>
+      <div className='text-9xl'>
+        <Rate rate={3.6}/>
+      </div>
       
-      
-      <div className='text-9xl'>{fullTime}</div>
-      <div className='text-5xl font-bold'>
-        {hour >= 0 &&  hour < 12 && 'Bom dia 😃'}  
-        {hour >= 12 && hour < 18 && 'Boa tarde 🤓'}  
-        {hour >= 23 && hour <= 23 && 'Boa noite 😴'}  
-        
-      </div>      
-    </div> 
+      </div>
   )
 }
 export default Page;  
