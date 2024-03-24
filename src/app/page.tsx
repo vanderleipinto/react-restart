@@ -1,14 +1,12 @@
-import { Rate } from '@/components/Rate';
-import { peopleList } from '@/data/peopleList'
+import { StudentTable } from '@/components/StudentTable';
+import { studentsList } from '@/data/students'
 
 function Page(){ 
   
   return(
-    <div className='w-screen h-screen flex flex-col justify-center items-center text-white
-    bg-gradient-to-r from-gray-900 to-gray-800'>
-      <div className='text-9xl'>
-        <Rate rate={6}/> 
-      </div>      
+    <div className='container mx-auto'>
+      <h1 className='text-5xl mb-5'>Lista de estudantes</h1>
+      <StudentTable students={studentsList}/>
     </div>
   )
 }

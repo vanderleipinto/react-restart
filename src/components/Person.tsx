@@ -1,5 +1,3 @@
-import { Pinyon_Script } from "next/font/google"
-
 type Props = {
   name: string,
   avatar?: string,
