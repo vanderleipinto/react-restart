@@ -1,37 +1,68 @@
 "use client";
 
-import { PersonState } from "@/types/PersonState";
+import { TodoItem } from "@/types/TodoItem";
 import { useState } from "react";
 
 
 
 export default function Page() {
 
-  const [fullName, setFullName] = useState<PersonState>({name: 'Vanderlei', lastName: 'Pinto'})  
-  
-  const handleLimparSomenteNome = () => {
-    setFullName({...fullName, name: ''})
+  const [itemInput, setItemInput] = useState('')
+  const [list, setList] = useState<TodoItem[]>([
+    {label: 'Homework', checked: false },
+    {label: 'Dinner', checked: true }
+  ]);
+
+  const handleAddItem = () => {
+    if (itemInput.trim() === '') return;    
+    {
+    setList([...list, {label:itemInput, checked:false}])
+    }
+    setItemInput('');
+  }
+
+  const handleDeleteItem = (index:number) => {
+    setList(
+      list.filter((item, key) => key !== index) // os itens cujo key(index) == index vão ser filtrados e não retornarão.
+    )
+  }
+
+  const toggleItem = (index: number) => {
+    
+    let cloneList = [...list];
+    cloneList[index].checked = !cloneList[index].checked;
+    setList(cloneList)
+    
   }
 
   return (
-    <div className="w-screen h-screen  bg-slate-700 flex flex-col justify-center items-center">
-      <input type="text"
-      placeholder="Nome"
-      className="border border-black p-3 text-2xl text-black rounded-md mb-3 "
-      value={fullName.name}
-      onChange={e => setFullName({...fullName, name: e.target.value})}
-      
-      />
-      <input type="text"
-      placeholder="Sobrenome"
-      className="border border-black p-3 text-2xl text-black rounded-md mb-3 "
-      value={fullName.lastName}
-      onChange={e => setFullName({...fullName, lastName: e.target.value})}
-      />
+    <div className="w-screen h-screen  bg-slate-700 flex flex-col justify-center items-center text-2xl">
+      <h1 className="text-4xl mt-5">Lista de Tarefas</h1>
 
-      <p>Meu nome completo é:</p>
-      <p>{fullName.name} {fullName.lastName}</p>
-      <button className="bg-orange-700 text-white border border-white" onClick={handleLimparSomenteNome} >Limpar somente nome</button>
+      <div className="flex w-full max-w-lg my-3 p-4 rounded-md bg-gray-700 border-2 border-gray-700">
+
+        <input 
+          type="text" 
+          placeholder="O que deseja fazer?"
+          className="flex-1 border border-black p-3 text-black rounded-md mr-3"
+          value={itemInput}
+          onChange={e => (setItemInput(e.target.value))}
+          />
+
+          <button onClick={ handleAddItem }>Adicionar</button>
+      </div>
+
+      <ul className="w-full max-w-lg list-disc pl-5">
+          {list.map((item, index) => (
+            <li key={index}>
+              <input type="checkbox" onClick={() => toggleItem(index)} checked={item.checked} className="w-6 h-6 mr-3"/>  
+              {item.label} 
+              <button onClick={() => handleDeleteItem(index) } className="bg-orange-400 text-white hover:bg-orange-700">Delete</button>
+            </li>
+          ))}
+      </ul>
+
+      
     </div>
   );
 }
