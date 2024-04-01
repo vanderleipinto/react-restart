@@ -1,68 +1,44 @@
 "use client";
 
-import { TodoItem } from "@/types/TodoItem";
+import { Modal } from "@/components/Modal";
+import { PhotoItem } from "@/components/PhotoItem";
+import { photoList } from "@/data/photoList";
 import { useState } from "react";
 
-
-
 export default function Page() {
+  const [showModal, setShowModal] = useState(false);
+  const [imageOfModal, setImageOfModal] = useState("");
 
-  const [itemInput, setItemInput] = useState('')
-  const [list, setList] = useState<TodoItem[]>([
-    {label: 'Homework', checked: false },
-    {label: 'Dinner', checked: true }
-  ]);
-
-  const handleAddItem = () => {
-    if (itemInput.trim() === '') return;    
-    {
-    setList([...list, {label:itemInput, checked:false}])
+  const openModal = (id: number) => {
+    const photo = photoList.find((item) => item.id === id);
+    console.log(id);
+    if (photo) {
+      setImageOfModal(photo.url);
+      setShowModal(true);
     }
-    setItemInput('');
-  }
-
-  const handleDeleteItem = (index:number) => {
-    setList(
-      list.filter((item, key) => key !== index) // os itens cujo key(index) == index vão ser filtrados e não retornarão.
-    )
-  }
-
-  const toggleItem = (index: number) => {
-    
-    let cloneList = [...list];
-    cloneList[index].checked = !cloneList[index].checked;
-    setList(cloneList)
-    
-  }
+  };
+  const closeModal = () => {
+    setShowModal(false);
+  };
 
   return (
-    <div className="w-screen h-screen  bg-slate-700 flex flex-col justify-center items-center text-2xl">
-      <h1 className="text-4xl mt-5">Lista de Tarefas</h1>
-
-      <div className="flex w-full max-w-lg my-3 p-4 rounded-md bg-gray-700 border-2 border-gray-700">
-
-        <input 
-          type="text" 
-          placeholder="O que deseja fazer?"
-          className="flex-1 border border-black p-3 text-black rounded-md mr-3"
-          value={itemInput}
-          onChange={e => (setItemInput(e.target.value))}
+    <div className="">
+      <h1 className="text-center text-3xl font-bold my-10">
+        Fotos Intergaláticas
+      </h1>
+      <section className="container max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {photoList.map((item) => (
+          <PhotoItem
+            key={item.id}
+            photo={item}
+            onClick={() => {
+              openModal(item.id);
+            }}
           />
+        ))}
+      </section>
 
-          <button onClick={ handleAddItem }>Adicionar</button>
-      </div>
-
-      <ul className="w-full max-w-lg list-disc pl-5">
-          {list.map((item, index) => (
-            <li key={index}>
-              <input type="checkbox" onClick={() => toggleItem(index)} checked={item.checked} className="w-6 h-6 mr-3"/>  
-              {item.label} 
-              <button onClick={() => handleDeleteItem(index) } className="bg-orange-400 text-white hover:bg-orange-700">Delete</button>
-            </li>
-          ))}
-      </ul>
-
-      
+      {showModal && <Modal image={imageOfModal} closeModal={closeModal} />}
     </div>
   );
 }
